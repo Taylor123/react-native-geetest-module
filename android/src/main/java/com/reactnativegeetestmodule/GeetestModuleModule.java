@@ -130,13 +130,16 @@ public class GeetestModuleModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void tearDown() {
-        getCurrentActivity().runOnUiThread(() -> {
-            if (gt3GeetestUtils != null) {
-                gt3GeetestUtils.destory();
-                gt3GeetestUtils = null;
-                gt3ConfigBean = null;
-            }
-        });
+        Activity activity = getCurrentActivity();
+        if (activity != null) {
+            activity.runOnUiThread(() -> {
+                if (gt3GeetestUtils != null) {
+                    gt3GeetestUtils.destory();
+                    gt3GeetestUtils = null;
+                    gt3ConfigBean = null;
+                }
+            });
+        }
     }
 
     @ReactMethod
